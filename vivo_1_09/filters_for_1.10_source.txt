@@ -1,0 +1,31 @@
+#
+# These are the filters
+#
+
+# Vitro 1.9 uses Apache Commons Lang 2, not 3
+import org.apache.commons.lang3=import org.apache.commons.lang
+import static org.apache.commons.lang3=import static org.apache.commons.lang
+
+# Vitro 1.9 uses Jena 2, not Jena 3
+import org.apache.jena=import com.hp.hpl.jena
+import static org.apache.jena=import static com.hp.hpl.jena
+
+# Jena 2 does not include the RDFLangString class;
+import com.hp.hpl.jena.datatypes.xsd.impl.RDFLangString=//import com.hp.hpl.jena.datatypes.xsd.impl.RDFLangString
+RDFLangString.rdfLangString=null
+
+# The code in webapp.utils.sparqlrunner is more advanced in Vitro 1.10 than in Vitro 1.9, so
+# 1) Borrow the source from Vitro 1.10
+# 2) Move it to its own package, so there is no conflict with the 1.9 classes
+# 3) Change references to use that new package.
+package edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner=package vitro_1_10.edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner
+import edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner=import vitro_1_10.edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner
+import static edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner=import static vitro_1_10.edu.cornell.mannlib.vitro.webapp.utils.sparqlrunner
+
+# The code in webapp.utils.configuration and is more advanced in Vitro 1.10, than in Vitro 1.9, so
+# 1) Borrow the source from Vitro 1.10
+# 2) Move it to its own package, so there is no conflict with the 1.9 classes
+# 3) Change references to use that new package.
+package edu.cornell.mannlib.vitro.webapp.utils.configuration=package vitro_1_10.edu.cornell.mannlib.vitro.webapp.utils.configuration
+import edu.cornell.mannlib.vitro.webapp.utils.configuration=import vitro_1_10.edu.cornell.mannlib.vitro.webapp.utils.configuration
+import static edu.cornell.mannlib.vitro.webapp.utils.configuration=import static vitro_1_10.edu.cornell.mannlib.vitro.webapp.utils.configuration

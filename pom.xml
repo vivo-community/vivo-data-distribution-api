@@ -1,0 +1,189 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <description><![CDATA[
+    ---------------------------------------------------------------------------
+
+    The controller project. 
+
+    Invoke the sub-projects as modules, and do the site generation for the 
+    whole shooting match.
+
+    ---------------------------------------------------------------------------
+    ]]></description>
+
+    <parent>
+        <groupId>edu.cornell.library.scholars</groupId>
+        <artifactId>data-distribution-api-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>parent/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>data-distribution-api</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>vivo_1_10</module>
+        <module>vivo_1_09</module>
+        <module>vivo_1_08</module>
+    </modules>
+
+    <properties>
+        <maven.site.skip>false</maven.site.skip>
+        
+        <!-- Used when creating the Javadocs -->
+        <vitro-version>1.10.0-beta2</vitro-version>
+
+        <!-- github server corresponds to entry in ~/.m2/settings.xml -->
+        <github.global.server>github</github.global.server>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- Nothing to install here. -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Nothing to deploy here. -->
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Create the site -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <port>9000</port>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>1.7</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Deploy the site to github-pages -->
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <repositoryName>vivo-data-distribution-api</repositoryName>
+                    <repositoryOwner>cul-it</repositoryOwner>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>siteGithubPages</id>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
+                        <configuration>
+                            <message>Creating site for
+                                ${project.version}</message>
+                            <outputDirectory>${project.build.directory}/site</outputDirectory>
+                            <branch>refs/heads/gh-pages</branch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>project-team</report>
+                            <report>license</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0-M1</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>javadoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <sourcepath>vivo_1_10/src/main/java</sourcepath>
+                    <quiet>true</quiet>
+                    <excludePackageNames>edu.cornell.mannlib.*</excludePackageNames>
+
+                    <!-- These should not be needed, but it appears that 
+                        they are. -->
+                    <additionalDependencies>
+                        <additionalDependency>
+                            <groupId>org.vivoweb</groupId>
+                            <artifactId>vitro-api</artifactId>
+                            <version>${vitro-version}</version>
+                            <type>jar</type>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <groupId>org.vivoweb</groupId>
+                            <artifactId>vitro-dependencies</artifactId>
+                            <version>${vitro-version}</version>
+                            <type>pom</type>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <groupId>org.vivoweb</groupId>
+                            <artifactId>vitro-api</artifactId>
+                            <version>${vitro-version}</version>
+                            <type>test-jar</type>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <groupId>junit</groupId>
+                            <artifactId>junit</artifactId>
+                            <version>4.11</version>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <groupId>javax.servlet</groupId>
+                            <artifactId>servlet-api</artifactId>
+                            <version>2.5</version>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <groupId>commons-io</groupId>
+                            <artifactId>commons-io</artifactId>
+                            <version>2.5</version>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <groupId>commons-logging</groupId>
+                            <artifactId>commons-logging</artifactId>
+                            <version>1.1.1</version>
+                        </additionalDependency>
+                        <additionalDependency>
+                            <groupId>org.apache.jena</groupId>
+                            <artifactId>jena-core</artifactId>
+                            <version>3.3.0</version>
+                        </additionalDependency>
+                    </additionalDependencies>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

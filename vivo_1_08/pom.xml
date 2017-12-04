@@ -1,0 +1,217 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <description><![CDATA[
+    ---------------------------------------------------------------------------
+
+    Version for VIVO 1.8
+    
+    This uses the source and test code from the Version for VIVO 1.10, edited to 
+    make it compatible with VIVO 1.8. It also borrows some code from VIVO 1.10 
+    itself, changes the package name to avoid conflicts, and adds it here.
+
+    * Vitro 1.8 uses Jena 2, not Jena 3, and Commons Lang 2, not 3, so modify 
+        the "import" statements in the Data Distribution code accordingly.
+    * Vitro 1.8 does not have a "...webapp.utils.sparqlrunner" package, so 
+        borrow the source from Vitro 1.10, move it to a different package (just
+        for compatibility with the 1.9 version), modify it to use Jena 2 and 
+        Commons Lang 2, and modify the Data Distribution API code to use this 
+        sparqlrunner package.
+    * Vitro 1.9 has an earlier version of "...webapp.utils.configuration" 
+        package, so borrow the source from Vitro 1.10, move it to a different
+        package so it won't conflict with the 1.9 version, modify it to use 
+        Jena 2 and Commons Lang 2, and modify the Data Distribution API code to 
+        use this configuration package.
+             
+    Make these modifications, compile, JAR it up, and deploy.
+    
+    ---------------------------------------------------------------------------
+
+    Because VIVO 1.8 is not available as a Maven package, we have extracted the
+    class files, JARed them up, and stored them in a file-based repository 
+    within this project.
+    
+    But that doesn't include any transitive dependencies, so any package that
+    this code requires must be explicitly listed as a dependency.
+    
+    ---------------------------------------------------------------------------
+    ]]></description>
+
+    <parent>
+        <groupId>edu.cornell.library.scholars</groupId>
+        <artifactId>data-distribution-api-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>data-distribution-api-vivo_1_08</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- The classes from VIVO and Vitro 1.8, jarred up and stored in 
+            a file-based repository within this project. -->
+        <dependency>
+            <groupId>edu.cornell.library.scholars</groupId>
+            <artifactId>vivo_classes</artifactId>
+            <version>1.8</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.jena/jena-core -->
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.jena/jena-arq -->
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Copy the source directories and modify. -->
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>filter_ddapi_1.10</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <basedir>${project.basedir}/../vivo_1_10/src/main/java</basedir>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <outputBasedir>${project.build.directory}/ddapi-1.10-filtered-source/main/java</outputBasedir>
+                            <outputDir>.</outputDir>
+                            <tokenValueMap>${project.basedir}/filters_for_1.10_source.txt</tokenValueMap>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>filter_ddapi_1.10_tests</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <basedir>${project.basedir}/../vivo_1_10/src/test/java</basedir>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <outputBasedir>${project.build.directory}/ddapi-1.10-filtered-source/test/java</outputBasedir>
+                            <outputDir>.</outputDir>
+                            <tokenValueMap>${project.basedir}/filters_for_1.10_source.txt</tokenValueMap>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>filter_vitro_1.10_excerpt</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <basedir>${project.basedir}/../src_from_vitro_1.10/main/java</basedir>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <outputBasedir>${project.build.directory}/vitro-1.10-filtered-source/main/java/vitro_1_10</outputBasedir>
+                            <outputDir>.</outputDir>
+                            <tokenValueMap>${project.basedir}/filters_for_1.10_source.txt</tokenValueMap>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Add the modified sources to the build. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/vitro-1.10-filtered-source/main/java</source>
+                                <source>${project.build.directory}/ddapi-1.10-filtered-source/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/ddapi-1.10-filtered-source/test/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <repositories>
+        <repository>
+            <id>vivo-and-vitro-dependencies-repo</id>
+            <url>file://${basedir}/vivo-and-vitro-dependencies-repo/</url>
+        </repository>
+    </repositories>
+</project>
