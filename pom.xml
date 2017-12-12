@@ -17,7 +17,7 @@
     <parent>
         <groupId>edu.cornell.library.scholars</groupId>
         <artifactId>data-distribution-api-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
         <relativePath>parent/pom.xml</relativePath>
     </parent>
 
@@ -31,8 +31,9 @@
     </modules>
 
     <properties>
-        <maven.site.skip>false</maven.site.skip>
-        
+        <!-- Explicitly enable the site generation. -->
+        <maven-site-plugin.skip>false</maven-site-plugin.skip>
+
         <!-- Used when creating the Javadocs -->
         <vitro-version>1.10.0-beta2</vitro-version>
 
@@ -134,9 +135,10 @@
                     <sourcepath>vivo_1_10/src/main/java</sourcepath>
                     <quiet>true</quiet>
                     <excludePackageNames>edu.cornell.mannlib.*</excludePackageNames>
+                    <additionalparam>-Xdoclint:none</additionalparam>
 
                     <!-- These should not be needed, but it appears that 
-                        they are. -->
+                        they are, to avoid warnings. -->
                     <additionalDependencies>
                         <additionalDependency>
                             <groupId>org.vivoweb</groupId>

@@ -6,7 +6,7 @@
     * This would be to change the commit comments for the artifacts. But is it enough to 
       keep the earlier Maven POM from disappearing?
   * How to handle Cross-site distribution: Cross-Origin Resource Sharing (CORS)
-	  * Reference: [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+	  * Reference: [Cross-Origin Resource Sharing][corsReference]
 	  * For now, 
 		  * Only simple requests are supported. Preflight requests are not supported.
 		  * all HTTP responses will include the header `Access-Control-Allow-Origin: *`
@@ -17,14 +17,39 @@
 
 # To build and deploy:
 
+## Run maven
+
     mvn clean site deploy
 
-This will:
-
 * compile and build the code.
-* update the code to the Maven repository on GitHub
+* update the code to the snapshot repository at Sonatype
 * assemble the site pages, including creating the JavaDoc and converting the MarkDown
 * deploy the site pages to GitHub.
+
+**There is no way to deploy a new version of the site without deploying a new version of the code to the repository at the same time.**
+
+* **Gotta fix that.**
+
+## Use the snapshot
+
+If the project version ends in "SNAPSHOT" then the code was deployed to [https://oss.sonatype.org/content/repositories/snapshots][snapshotRepo]
+
+You can see it by directly visiting [the snapshot repository][snapshotRepoProject] or by going to the [repository browser][repositoryBrowser], logging in, and choosing _Snapshots_ from the list at _Repositories_.
+
+You can use it by BOGUS BOGUS
+
+## Use the release
+If the project version does not end in "SNAPSHOT", then the code is deployed to BOGUS BOGUS
+You can see it by BOGUS BOGUS
+
+This is a staging repository. To move to the full repository, you need to close and release the code.
+Close it by BOGUS BOGUS
+Release it by BOGUS BOGUS
+
+### References
+http://central.sonatype.org/pages/ossrh-guide.html
+https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be
+
     
 # UML Diagrams    
 `Modeling.mdj` is a file created using StarUML. It contains the model and diagrams
@@ -95,7 +120,7 @@ that were used to create the UML diagrams in the site pages.
     ```
 
 ### Reference
-* [Stack Overflow: maven-add-a-dependency-to-a-jar-by-relative-path](https://stackoverflow.com/questions/2229757/maven-add-a-dependency-to-a-jar-by-relative-path/2230464#2230464)
+* [Stack Overflow: maven-add-a-dependency-to-a-jar-by-relative-path][stackOverflow1]
 
 # "Borrowing" source code from VIVO 1.10
 The versions for VIVO 1.9 and VIVO 1.8 need to get the DDAPI source code and the source for some utility packages from VIVO 1.10. All of this source code must be modified to work with the older VIVO dependencies.
@@ -133,3 +158,11 @@ Filter the borrowed Vitro 1.10 source.
 ## Add the source and tests to the project
 
 Use the `build-helper-maven-plugin` to make Maven aware of these source directories and test directory.
+
+
+
+[corsReference]:       https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[repositoryBrowser]:   https://oss.sonatype.org/
+[snapshotRepo]:        https://oss.sonatype.org/content/repositories/snapshots
+[snapshotRepoProject]: https://oss.sonatype.org/content/repositories/snapshots/edu/cornell/library/scholars/
+[stackOverflow1]:      https://stackoverflow.com/questions/2229757/maven-add-a-dependency-to-a-jar-by-relative-path/2230464#2230464
