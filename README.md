@@ -34,6 +34,8 @@ Currently, the Data Distribution API can be used with:
 
 The main site for documents is [here](https://cul-it.github.io/vivo-data-distribution-api).
 
+**Developers: tips, tricks, and warnings are in** `docs/Developers_Notes.md`
+
 ## Credits
 The Data Distribution API for VIVO is created by the staff of the Cornell University Libraries, 
 as part of the [Scholars@Cornell](http://scholars.cornell.edu) project.

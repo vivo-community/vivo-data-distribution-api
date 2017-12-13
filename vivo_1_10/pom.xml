@@ -16,7 +16,6 @@
         <groupId>edu.cornell.library.scholars</groupId>
         <artifactId>data-distribution-api-parent</artifactId>
         <version>1.1-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>data-distribution-api-vivo_1_10</artifactId>
@@ -52,19 +51,20 @@
 
     <build>
         <plugins>
-            <!-- Attach sources to the artifact -->
+            <!-- Include Java source with the deployed artifacts. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
 
-            <!-- Attach JavaDoc to the artifact -->
+            <!-- Include Javadocs with the deployed artifacts. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.0-M1</version>
             </plugin>
 
-            <!-- Sign the files -->
+            <!-- Create GPG signatures on all artifacts. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>

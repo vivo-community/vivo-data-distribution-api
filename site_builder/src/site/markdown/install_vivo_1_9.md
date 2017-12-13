@@ -1,4 +1,4 @@
-# Installing in VIVO 1.10
+# Installing in VIVO 1.9
 Install the API in VIVO by following these steps:
 
 * Edit `{Vitro}/dependencies/pom.xml`, adding the Data Distribution API as a dependency, from its own repository.
@@ -18,8 +18,8 @@ There are many `<dependency>` tags within the `<dependencies>` section of `pom.x
   <!-- Data Distribution API -->
   <dependency>
     <groupId>edu.cornell.library.scholars</groupId>
-    <artifactId>DataDistributionAPI_VIVO_1.10.0</artifactId>
-    <version>1.0</version>
+    <artifactId>data-distribution-api-vivo_1_09</artifactId>
+    <version>1.1-SNAPSHOT</version>
     <type>jar</type>
   </dependency>
 ```
@@ -32,10 +32,9 @@ There are no `<repository>` tags in `pom.xml`. Add one, telling Maven where to f
     <repository>
       <id>data-distribution-api</id>
       <name>DataDistributionAPI</name>
-      <url>https://raw.github.com/j2blake/DataDistributionAPI_VIVO_1.10.0/mvn-repo/</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
-  </repositories>
-    
+  </repositories>    
 ```
 
 Before editing, you might see this at the end of `pom.xml`:

@@ -15,11 +15,11 @@
 
 
 
-# To build and deploy:
+# Build, test, deploy
 
 ## Run maven
 
-    mvn clean site deploy
+    mvn clean install site deploy
 
 * compile and build the code.
 * update the code to the snapshot repository at Sonatype
@@ -28,7 +28,28 @@
 
 **There is no way to deploy a new version of the site without deploying a new version of the code to the repository at the same time.**
 
-* **Gotta fix that.**
+* Gotta fix that.
+
+**The Maven script prompts for a passphrase that will be used in signing the artifacts.**
+
+* The key used to sign the artifacts is the default key for the account where the build occurs. The public key must be published so people can verify the signatures.
+* Check out the page at [http://central.sonatype.org/pages/working-with-pgp-signatures.html](http://central.sonatype.org/pages/working-with-pgp-signatures.html)
+
+**It takes some time to build the site.**
+
+The build script will appear to pause at this message:
+
+```
+[INFO] --- site-maven-plugin:0.12:site (siteGithubPages) @ data-distribution-api-site ---
+[INFO] Creating 160 blobs
+```
+
+On my machine, the entire build takes about 9 minutes
+
+## Test the site pages
+
+	cd site_builder
+	mvn site:run
 
 ## Use the snapshot
 
@@ -36,7 +57,7 @@ If the project version ends in "SNAPSHOT" then the code was deployed to [https:/
 
 You can see it by directly visiting [the snapshot repository][snapshotRepoProject] or by going to the [repository browser][repositoryBrowser], logging in, and choosing _Snapshots_ from the list at _Repositories_.
 
-You can use it by BOGUS BOGUS
+You can use it as described in the installation instructions.
 
 ## Use the release
 If the project version does not end in "SNAPSHOT", then the code is deployed to BOGUS BOGUS
@@ -47,8 +68,9 @@ Close it by BOGUS BOGUS
 Release it by BOGUS BOGUS
 
 ### References
-http://central.sonatype.org/pages/ossrh-guide.html
-https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be
+[http://central.sonatype.org/pages/ossrh-guide.html](http://central.sonatype.org/pages/ossrh-guide.html)
+
+[https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be](https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be)
 
     
 # UML Diagrams    

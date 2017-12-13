@@ -12,10 +12,26 @@ More details are in the sections below.
 
 ## Download the JAR file and add it to your Vitro distribution directory.
 
-The JAR file is located here: 
-[DataDistributionAPI_VIVO_1.8-1.0.jar](resources/DataDistributionAPI_VIVO_1.8-1.0.jar)
+The JAR file is located in the [Snapshots repository at Sonotype.org](https://oss.sonatype.org/content/repositories/snapshots). You can browse through the directory structure to find the most recent snapshot for the API, and download the JAR file. 
 
-Download the JAR file and add it to your project's top-level `lib` directory.
+Alternatively, if you have Maven installed on your machine, you can use this command to fetch the most recent snapshot to the local repository on your machine:
+
+```
+mvn org.apache.maven.plugins:maven-dependency-plugin:get \
+    -DrepoUrl=https://oss.sonatype.org/content/repositories/snapshots \
+    -DgroupId=edu.cornell.library.scholars \
+    -DartifactId=data-distribution-api-vivo_1_08 \
+    -Dversion=1.1-SNAPSHOT \
+    -Dtransitive=false
+```
+
+When maven completes, you will find the JAR file here:
+
+```
+~/.m2/repository/edu/cornell/library/scholars/data-distribution-api-vivo_1_08/1.1-SNAPSHOT/data-distribution-api-vivo_1_08-1.1-SNAPSHOT.jar
+```
+
+Copy or move the JAR file to your project's top-level `lib` directory.
 
 * If you are using a standard VIVO distribution, add the JAR file to `[VIVO]/lib`
 * If you have added a third tier, add the JAR file to the `lib` directory of your third tier.
@@ -58,7 +74,7 @@ After editing, you would see this:
 
 Create a configuration file for the example distributor. The file will contain RDF data that tells the Data Distributor 
 controller how to respond to requests. The file must be created in your VIVO distribution (or your third tier) 
-in `{VIVO}/home/src/main/resources/rdf/display/everytime`.
+in `{VIVO}/rdf/display/everytime`.
 
 For this example, create a file named `HelloDistributorConfig.ttl`:
 
