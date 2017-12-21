@@ -162,7 +162,6 @@
                     <version>1.6</version>
                     <executions>
                         <execution>
-                            <id>sign-artifacts</id>
                             <phase>verify</phase>
                             <goals>
                                 <goal>sign</goal>
@@ -172,6 +171,14 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <!-- Create GPG signatures on all artifacts. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
     <!-- Deploy to the Sonatype repositories -->

@@ -17,23 +17,63 @@
 
 # Build, test, deploy
 
-## Run maven
+## Build and install locally
+Use this when you want to test changes, but don't want to deploy to the OSS respository
 
-    mvn clean install site deploy
+```
+cd {top-level-directory}
+mvn clean install
+```
 
-* compile and build the code.
-* update the code to the snapshot repository at Sonatype
-* assemble the site pages, including creating the JavaDoc and converting the MarkDown
-* deploy the site pages to GitHub.
+* Compile the code, test, create the JARs.
+* Update the code to the local repository
 
-**There is no way to deploy a new version of the site without deploying a new version of the code to the repository at the same time.**
+## Test the site pages
+Use this when editing the site pages, to see what the site will look like.
 
-* Gotta fix that.
+```
+cd {top-level-directory}/site_builder
+mvn site:run
+```
+
+* Assemble the site pages
+* Serve the pages at [http://localhost:9000](http://localhost:9000).
+	* Note that the Javadoc pages are not created until you ask for them, so there may be some delay.
+
+## Build and deploy
+Use this when you are ready to deploy to the OSS repository
+
+```
+cd {top-level-directory}
+mvn clean site deploy
+```
+
+* Compile the code, test, create the JARs.
+* Update the code to the snapshot repository at Sonatype
+* Assemble the site pages
+* Deploy the site pages to GitHub.
+
+**DO NOT run `install` and `deploy` in the same command, or you wind up with double signatures.**
+
+## Update the site
+Use this to deploy changes to the site pages without updating the OSS repository
+
+```
+cd {top-level-directory}/site_builder
+mvn site deploy
+```
+
+* Assemble the site pages
+* Deploy the site pages to GitHub.
+
+## Note: GPG-signatures
 
 **The Maven script prompts for a passphrase that will be used in signing the artifacts.**
 
 * The key used to sign the artifacts is the default key for the account where the build occurs. The public key must be published so people can verify the signatures.
 * Check out the page at [http://central.sonatype.org/pages/working-with-pgp-signatures.html](http://central.sonatype.org/pages/working-with-pgp-signatures.html)
+
+## Note: pause in the build script
 
 **It takes some time to build the site.**
 
@@ -45,11 +85,6 @@ The build script will appear to pause at this message:
 ```
 
 On my machine, the entire build takes about 9 minutes
-
-## Test the site pages
-
-	cd site_builder
-	mvn site:run
 
 ## Use the snapshot
 
@@ -67,7 +102,7 @@ This is a staging repository. To move to the full repository, you need to close 
 Close it by BOGUS BOGUS
 Release it by BOGUS BOGUS
 
-### References
+## References
 [http://central.sonatype.org/pages/ossrh-guide.html](http://central.sonatype.org/pages/ossrh-guide.html)
 
 [https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be](https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be)
@@ -141,7 +176,7 @@ that were used to create the UML diagrams in the site pages.
 
     ```
 
-### Reference
+## Reference
 * [Stack Overflow: maven-add-a-dependency-to-a-jar-by-relative-path][stackOverflow1]
 
 # "Borrowing" source code from VIVO 1.10
