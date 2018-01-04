@@ -10,6 +10,11 @@ In these instructions, `{VIVO}` and `{Vitro}` are used to indicate the paths to 
 
 More details are in the sections below.
 
+_**Note: These instructions describe how to install a stable release of the API. 
+To install a (non stable) SNAPSHOT, use 
+[these instructions](installing_the_latest_snapshot.html#vivo1.10) 
+instead.**_
+
 ## Edit `{Vitro}/dependencies/pom.xml`
 
 There are many `<dependency>` tags within the `<dependencies>` section of `pom.xml`. Add another dependency:
@@ -19,32 +24,18 @@ There are many `<dependency>` tags within the `<dependencies>` section of `pom.x
   <dependency>
     <groupId>edu.cornell.library.scholars</groupId>
     <artifactId>data-distribution-api-vivo_1_10</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <type>jar</type>
   </dependency>
 ```
 
-There are no `<repository>` tags in `pom.xml`. Add one, telling Maven where to find the Data Distribution API:
-
-```
-  <!-- Reference the repository for the Data Distribution API. -->
-  <repositories>
-    <repository>
-      <id>data-distribution-api</id>
-      <name>DataDistributionAPI</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-  </repositories>
-    
-```
-
 Before editing, you might see this at the end of `pom.xml`:
 
-![pom.xml before editing](images/pom_xml_before.png)
+![pom.xml before editing](images/pom_xml_vivo1.10_before.png)
 
 After editing, you would see this:
 
-![pom.xml after editing](images/pom_xml_after.png)
+![pom.xml after editing](images/pom_xml_vivo1.10_after_release.png)
 
 ## Edit `web.xml`
 

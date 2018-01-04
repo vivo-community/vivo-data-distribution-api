@@ -1,18 +1,29 @@
 # Questions
 
-  * how can I put a 1.1 Snapshot version on the Maven repo without clobbering the 1.0 version?
-    * Should I start putting older versions onto Maven central?
   * Do I need to make manual updates to the pom.xml after each release
     * This would be to change the commit comments for the artifacts. But is it enough to 
       keep the earlier Maven POM from disappearing?
-  * How to handle Cross-site distribution: Cross-Origin Resource Sharing (CORS)
-	  * Reference: [Cross-Origin Resource Sharing][corsReference]
-	  * For now, 
-		  * Only simple requests are supported. Preflight requests are not supported.
-		  * all HTTP responses will include the header `Access-Control-Allow-Origin: *`
-	  * It would be better to 
+  
+# To do:
 
+* Create a deploy profile. Only require signing if that profile is used.
+	* Can we make it so `deploy` is the default target for that profile?
 
+* Move the site deployment from `deploy` to `site-deploy`. 
+	* Then, can I safely do these commands?
+		* `mvn clean site`
+		* `mvn clean deploy`
+		* `mvn clean site-deploy`
+
+* CORS 
+	* Configure individual data distributors
+		* Requires enhancement to the ConfigurationBeanLoader
+	* Put headers on error responses also
+		* The goal is that 404 should be reported as such by the browser, not as 400.
+	* Support preflight requests 
+		* At least enough to do basic authentication
+	* Reference: [Cross-Origin Resource Sharing][corsReference]
+ 	
 
 
 # Build, test, deploy
@@ -66,6 +77,23 @@ mvn site deploy
 * Assemble the site pages
 * Deploy the site pages to GitHub.
 
+## Change the version numbers
+Use this when changing from SNAPSHOT to a release version, or vice versa
+
+```
+mvn release:update-versions -DautoVersionSubmodules=true
+```
+
+* Prompt you for a version number, and set it in the main project and sub-projects.
+
+## Issue a release
+
+Build and deploy with a non-SNAPSHOT version number.
+
+Go through the OSS release process
+
+* Reference: [Releasing the Deployment][ossReleaseDoc]
+
 ## Note: GPG-signatures
 
 **The Maven script prompts for a passphrase that will be used in signing the artifacts.**
@@ -88,9 +116,9 @@ On my machine, the entire build takes about 9 minutes
 
 ## Use the snapshot
 
-If the project version ends in "SNAPSHOT" then the code was deployed to [https://oss.sonatype.org/content/repositories/snapshots][snapshotRepo]
+If the project version ends in "SNAPSHOT" then the code was deployed to [https://oss.sonatype.org/content/repositories/snapshots][ossSnapshotRepo]
 
-You can see it by directly visiting [the snapshot repository][snapshotRepoProject] or by going to the [repository browser][repositoryBrowser], logging in, and choosing _Snapshots_ from the list at _Repositories_.
+You can see it by directly visiting [the snapshot repository][ossSnapshotRepoProject] or by going to the [repository browser][ossRepositoryBrowser], logging in, and choosing _Snapshots_ from the list at _Repositories_.
 
 You can use it as described in the installation instructions.
 
@@ -218,8 +246,9 @@ Use the `build-helper-maven-plugin` to make Maven aware of these source director
 
 
 
-[corsReference]:       https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-[repositoryBrowser]:   https://oss.sonatype.org/
-[snapshotRepo]:        https://oss.sonatype.org/content/repositories/snapshots
-[snapshotRepoProject]: https://oss.sonatype.org/content/repositories/snapshots/edu/cornell/library/scholars/
-[stackOverflow1]:      https://stackoverflow.com/questions/2229757/maven-add-a-dependency-to-a-jar-by-relative-path/2230464#2230464
+[corsReference]:          https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[ossReleaseDoc]:          http://central.sonatype.org/pages/releasing-the-deployment.html
+[ossRepositoryBrowser]:   https://oss.sonatype.org/
+[ossSnapshotRepo]:        https://oss.sonatype.org/content/repositories/snapshots
+[ossSnapshotRepoProject]: https://oss.sonatype.org/content/repositories/snapshots/edu/cornell/library/scholars/
+[stackOverflow1]:         https://stackoverflow.com/questions/2229757/maven-add-a-dependency-to-a-jar-by-relative-path/2230464#2230464

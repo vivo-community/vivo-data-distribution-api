@@ -2,8 +2,7 @@
 
 ## Purpose
 
-With the Data Distribution API, you create data feeds from your VIVO site 
-simply by editing a configuration file. 
+Create data feeds from your VIVO site just by editing a configuration file. 
 
 Use the feeds to:
 
@@ -25,8 +24,8 @@ _You will likely need to know SPARQL, and the structure of how your data is stor
 Currently, the Data Distribution API can be used with:
 
 * VIVO 1.10.0-beta2 
-* VIVO 10.9 
-* VIVO 10.8 
+* VIVO 1.9 
+* VIVO 1.8 
 
 (or other products that are based on those Vitro releases).
 

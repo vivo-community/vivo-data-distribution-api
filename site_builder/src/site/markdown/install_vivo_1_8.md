@@ -10,6 +10,11 @@ In these instructions, `{VIVO}` and `{Vitro}` are used to indicate the paths to 
 
 More details are in the sections below.
 
+_**Note: These instructions describe how to install a stable release of the API. 
+To install a (non stable) SNAPSHOT, use 
+[these instructions](installing_the_latest_snapshot.html#vivo1.8) 
+instead.**_
+
 ## Download the JAR file and add it to your Vitro distribution directory.
 
 The JAR file is located in the [Snapshots repository at Sonotype.org](https://oss.sonatype.org/content/repositories/snapshots). You can browse through the directory structure to find the most recent snapshot for the API, and download the JAR file. 
@@ -18,17 +23,16 @@ Alternatively, if you have Maven installed on your machine, you can use this com
 
 ```
 mvn org.apache.maven.plugins:maven-dependency-plugin:get \
-    -DrepoUrl=https://oss.sonatype.org/content/repositories/snapshots \
     -DgroupId=edu.cornell.library.scholars \
     -DartifactId=data-distribution-api-vivo_1_08 \
-    -Dversion=1.1-SNAPSHOT \
+    -Dversion=1.1 \
     -Dtransitive=false
 ```
 
 When maven completes, you will find the JAR file here:
 
 ```
-~/.m2/repository/edu/cornell/library/scholars/data-distribution-api-vivo_1_08/1.1-SNAPSHOT/data-distribution-api-vivo_1_08-1.1-SNAPSHOT.jar
+~/.m2/repository/edu/cornell/library/scholars/data-distribution-api-vivo_1_08/1.1/data-distribution-api-vivo_1_08-1.1.jar
 ```
 
 Copy or move the JAR file to your project's top-level `lib` directory.

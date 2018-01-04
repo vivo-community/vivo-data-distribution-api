@@ -11,6 +11,7 @@
 			<item name="Implementations" href="catalog.html" />
 			<item name="Cross-site distributions" href="cors.html" />
 			<item name="Javadoc" href="apidocs/index.html" />
+			<item name="Release notes" href="release_notes.html" />
 		</menu>
 		<menu ref="reports" inherit="top" />
 	</body>

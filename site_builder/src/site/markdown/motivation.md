@@ -14,7 +14,7 @@ In addition, the visualizations must be
 * responsive, so as not to interrupt the user experience,
 * easy to develop, to fit in with the frequent iterations of Scholars development.
 
-The Data Distribution API began with these requirements, but has since grown to provide a more general-purpose soltion for communicating with VIVO.
+The Data Distribution API began with these requirements, but has since grown to provide a more general-purpose solution for communicating with VIVO.
 
 ## The philosophy of the API
 Today's computing environment is ideally suited to interactive visualizations, and distributed use of data.
