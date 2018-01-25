@@ -9,7 +9,7 @@ The instructions below describe how to install the latest (not stable) snapshot.
 The difference is in the `pom.xml` file, which requires
 
 * use a `SNAPSHOT` version number, 
-* include a reference to the snapshot repostory.
+* include a reference to the snapshot repository.
 
 _**Other installation steps are unchanged.**_
 

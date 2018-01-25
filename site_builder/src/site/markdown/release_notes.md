@@ -1,5 +1,9 @@
 # Release Notes
 
+## version 1.2
+
+* Use servlet annotations to simplify installation. No need to modify web.xml.
+
 ## version 1.1
 
 * Unify the projects for VIVO 1.8, 1.9 and 1.10 into one project with multiple artifacts.

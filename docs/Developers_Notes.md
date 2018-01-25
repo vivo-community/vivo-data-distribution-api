@@ -9,6 +9,10 @@
 * Create a deploy profile. Only require signing if that profile is used.
 	* Can we make it so `deploy` is the default target for that profile?
 
+* Create a written process for release, including site.
+
+* Create a written process for starting a new SNAPSHOT.
+
 * Move the site deployment from `deploy` to `site-deploy`. 
 	* Then, can I safely do these commands?
 		* `mvn clean site`

@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,6 +37,7 @@ import edu.cornell.mannlib.vitro.webapp.utils.configuration.ConfigurationBeanLoa
  * Find a distributor description for the requested action. Create an instance
  * of that distributor. Write its data to the HTTP response.
  */
+@WebServlet(name = "DistributeDataApi", urlPatterns = {"/api/dataRequest/*"} )
 public class DistributeDataApiController extends VitroApiServlet {
     private static final Log log = LogFactory
             .getLog(DistributeDataApiController.class);

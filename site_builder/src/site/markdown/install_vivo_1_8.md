@@ -2,7 +2,6 @@
 Install the API in VIVO by following these steps:
 
 * Download the JAR file and add it to your Vitro distribution directory.
-* Edit `web.xml` in VIVO, or in your third tier, if you have one, to establish a `servlet-mapping` for the Data Distribution API.
 * Configure a sample distributor.
 * Build VIVO as you would normally.
 
@@ -39,40 +38,6 @@ Copy or move the JAR file to your project's top-level `lib` directory.
 
 * If you are using a standard VIVO distribution, add the JAR file to `[VIVO]/lib`
 * If you have added a third tier, add the JAR file to the `lib` directory of your third tier.
-
-## Edit `web.xml`
-
-You may have several files named `web.xml` in your project. Each tier overrides the previous tier, so:
-
-* if you are using a standard VIVO distribution, you will edit `{VIVO}/webapp/src/main/webapp/web.xml`. 
-* If you have added a third tier, with its own `web.xml` file, you should edit that one instead.
-* If you have added a third tier, but it does not contain `web.xml`, you should edit the `web.xml` in VIVO, as above.
-
-Add a `<servlet>` tag and a `<servlet-mapping>` tag to associate the 
-`api/dataRequest` with the `DistributeDataApiController`, like this:
-
-```
-  <!-- Data Distribution API -->
-  <servlet>
-    <servlet-name>DistributeDataApi</servlet-name>
-    <servlet-class>edu.cornell.library.scholars.webapp.controller.api.DistributeDataApiController</servlet-class>
-  </servlet>
-
-  <!-- Data Distribution API -->
-  <servlet-mapping>
-    <servlet-name>DistributeDataApi</servlet-name>
-    <url-pattern>/api/dataRequest/*</url-pattern>
-  </servlet-mapping>
-```
-These tags can be placed anywhere among the other servlet-related tags.
-
-Before editing, you might see this in `web.xml`:
-
-![web.xml before editing](images/web_xml_before.png)
-
-After editing, you would see this:
-
-![web.xml after editing](images/web_xml_after.png)
 
 ## Configure a distributor
 
