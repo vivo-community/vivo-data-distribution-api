@@ -3,12 +3,12 @@
 package edu.cornell.library.scholars.webapp.controller.api.distribute.decorator;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import javax.script.ScriptException;
@@ -45,6 +45,7 @@ import stubs.javax.servlet.ServletContextStub;
 public class JavaScriptTransformDistributorTest extends AbstractTestClass {
     private static final String ACTION_NAME = "tester";
     private static final String JAVASCRIPT_TYPE = "text/javascript";
+    private static final String TEXT_TYPE = "text/plain";
 
     private static final String BAD_SYNTAX_SCRIPT = "" //
             + "function transform( {}";
@@ -65,6 +66,13 @@ public class JavaScriptTransformDistributorTest extends AbstractTestClass {
             + "}";
 
     private static final String SIMPLE_EXPECTED_RESULT = "true";
+
+    private static final String ECHO_SCRIPT = "" //
+            + "function transform(data) { \n" //
+            + "    return data; \n" //
+            + "}";
+
+    private static final String UNICODE_STRING = "Lévesque";
 
     private static final String FULL_SCRIPT = "" //
             + "function transform(data) { \n" //
@@ -183,6 +191,37 @@ public class JavaScriptTransformDistributorTest extends AbstractTestClass {
     public void parseTransformAndStringify() throws DataDistributorException {
         transformAndCheck(INITIAL_STRUCTURE, FULL_SCRIPT,
                 TRANSFORMED_STRUCTURE);
+    }
+
+    /**
+     * This test is intended to check whether Unicode is handled properly
+     * regardless of the system's default file encoding.
+     * 
+     * However there might be failures that only show up if the default value of
+     * the system property file.encoding is not UTF-8.
+     * 
+     * The commented code is a hacky way of ensuring that the file encoding is
+     * not UTF-8, but in Java 9 or later, it will cause warning messages.
+     * 
+     * So we have a test that might pass in some environments and fail in
+     * others.
+     */
+    @Test
+    public void unicodeCharactersArePreserved()
+            throws DataDistributorException, UnsupportedEncodingException {
+        // try {
+        // System.setProperty("file.encoding", "ANSI_X3.4-1968");
+        // Field charset = Charset.class.getDeclaredField("defaultCharset");
+        // charset.setAccessible(true);
+        // charset.set(null, null);
+        // } catch (Exception e) {
+        // throw new RuntimeException(e);
+        // }
+
+        child = new TestDistributor(TEXT_TYPE, UNICODE_STRING);
+        runTransformer(ECHO_SCRIPT);
+        assertEquals(UNICODE_STRING,
+                new String(outputStream.toByteArray(), "UTF-8"));
     }
 
     // ----------------------------------------------------------------------
@@ -337,6 +376,10 @@ public class JavaScriptTransformDistributorTest extends AbstractTestClass {
     // Helper classes
     // ----------------------------------------------------------------------
 
+    /**
+     * Just echoes a given string with a given contentType, or throws an
+     * Exception, if you prefer.
+     */
     private static class TestDistributor extends AbstractDataDistributor {
         private String contentType;
         private String outputString;
@@ -365,7 +408,7 @@ public class JavaScriptTransformDistributorTest extends AbstractTestClass {
                 if (throwException) {
                     throw new DataDistributorException("forced exception.");
                 }
-                output.write(outputString.getBytes());
+                output.write(outputString.getBytes("UTF-8"));
             } catch (IOException e) {
                 throw new RuntimeException();
             }

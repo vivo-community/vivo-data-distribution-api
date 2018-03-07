@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,7 +173,11 @@ public class JavaScriptTransformDistributor extends AbstractDataDistributor {
             throw new DataDistributorException(
                     "Child distributor threw an exception", e);
         }
-        return new String(childOut.toByteArray());
+        try {
+            return childOut.toString("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("What? No UTF-8 Charset?", e);
+        }
     }
 
     private String runTransformFunction(ScriptEngine engine, String childOutput)
@@ -200,7 +205,7 @@ public class JavaScriptTransformDistributor extends AbstractDataDistributor {
     private void writeTransformedOutput(OutputStream output, String transformed)
             throws DataDistributorException {
         try {
-            output.write(transformed.getBytes());
+            output.write(transformed.getBytes("UTF-8"));
         } catch (IOException e) {
             throw new DataDistributorException(e);
         }
