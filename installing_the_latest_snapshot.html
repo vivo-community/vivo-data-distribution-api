@@ -49,7 +49,7 @@
                           <a href="structure.html" title="How does it work?">How does it work?</a>
             </li>
                   <li class="none">
-                          <a href="install_vivo_1_10.html" title="Install in VIVO 1.10">Install in VIVO 1.10</a>
+                          <a href="install_vivo_1_10.html" title="Using in VIVO 1.10">Using in VIVO 1.10</a>
             </li>
                   <li class="none">
                           <a href="install_vivo_1_9.html" title="Install in VIVO 1.9">Install in VIVO 1.9</a>
@@ -93,49 +93,6 @@
         <h1>Installing the latest snapshot of the API</h1>
 <p>The main installation instructions describe how to install the latest stable release of the Data Distribution API.</p>
 <p>The instructions below describe how to install the latest (not stable) snapshot.</p>
-<p><a name="vivo1.10"></a></p>
-<h1>Installing the latest snapshot into VIVO 1.10</h1>
-<p>The difference is in the <tt>pom.xml</tt> file, which requires</p>
-
-<ul>
-  
-<li>use a <tt>SNAPSHOT</tt> version number,</li>
-  
-<li>include a reference to the snapshot repository.</li>
-</ul>
-<p><i><b>Other installation steps are unchanged.</b></i></p>
-<div class="section">
-<h2><a name="Edit_Vitrodependenciespom.xml"></a>Edit <tt>{Vitro}/dependencies/pom.xml</tt></h2>
-<p>There are many <tt>&lt;dependency&gt;</tt> tags within the <tt>&lt;dependencies&gt;</tt> section of <tt>pom.xml</tt>. Add another dependency:</p>
-
-<div class="source">
-<div class="source">
-<pre>  &lt;!-- Data Distribution API --&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;edu.cornell.library.scholars&lt;/groupId&gt;
-    &lt;artifactId&gt;data-distribution-api-vivo_1_10&lt;/artifactId&gt;
-    &lt;version&gt;1.1-SNAPSHOT&lt;/version&gt;
-    &lt;type&gt;jar&lt;/type&gt;
-  &lt;/dependency&gt;
-</pre></div></div>
-<p>There are no <tt>&lt;repository&gt;</tt> tags in <tt>pom.xml</tt>. Add one, telling Maven where to find the Data Distribution API:</p>
-
-<div class="source">
-<div class="source">
-<pre>  &lt;!-- Reference the repository for the Data Distribution API. --&gt;
-  &lt;repositories&gt;
-    &lt;repository&gt;
-      &lt;id&gt;data-distribution-api&lt;/id&gt;
-      &lt;name&gt;DataDistributionAPI&lt;/name&gt;
-      &lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots&lt;/url&gt;
-    &lt;/repository&gt;
-  &lt;/repositories&gt;
-    
-</pre></div></div>
-<p>Before editing, you might see this at the end of <tt>pom.xml</tt>:</p>
-<p><img src="images/pom_xml_vivo1.10_before.png" alt="pom.xml before editing" /></p>
-<p>After editing, you would see this:</p>
-<p><img src="images/pom_xml_vivo1.10_after_snapshot.png" alt="pom.xml after editing" /></p>
 <p><a name="vivo1.9"></a></p>
 <h1>Installing the latest snapshot into VIVO 1.9</h1>
 <p>The difference is in the <tt>pom.xml</tt> file, which requires</p>
@@ -146,7 +103,7 @@
   
 <li>include a reference to the snapshot repostory.</li>
 </ul>
-<p><i><b>Other installation steps are unchanged.</b></i></p></div>
+<p><i><b>Other installation steps are unchanged.</b></i></p>
 <div class="section">
 <h2><a name="Edit_Vitrodependenciespom.xml"></a>Edit <tt>{Vitro}/dependencies/pom.xml</tt></h2>
 <p>There are many <tt>&lt;dependency&gt;</tt> tags within the <tt>&lt;dependencies&gt;</tt> section of <tt>pom.xml</tt>. Add another dependency:</p>

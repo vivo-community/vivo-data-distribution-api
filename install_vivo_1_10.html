@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Data Distribution API for VIVO &#x2013; Installing in VIVO 1.10</title>
+    <title>Data Distribution API for VIVO &#x2013; Using in VIVO 1.10</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -49,7 +49,7 @@
                           <a href="structure.html" title="How does it work?">How does it work?</a>
             </li>
                   <li class="none">
-            <strong>Install in VIVO 1.10</strong>
+            <strong>Using in VIVO 1.10</strong>
           </li>
                   <li class="none">
                           <a href="install_vivo_1_9.html" title="Install in VIVO 1.9">Install in VIVO 1.9</a>
@@ -90,38 +90,9 @@
     </div>
     <div id="bodyColumn">
       <div id="contentBox">
-        <h1>Installing in VIVO 1.10</h1>
-<p>Install the API in VIVO by following these steps:</p>
-
-<ul>
-  
-<li>Edit <tt>{Vitro}/dependencies/pom.xml</tt>, adding the Data Distribution API as a dependency, from its own repository.</li>
-  
-<li>Configure a sample distributor.</li>
-  
-<li>Build VIVO as you would normally.</li>
-</ul>
-<p>In these instructions, <tt>{VIVO}</tt> and <tt>{Vitro}</tt> are used to indicate the paths to the directories of the VIVO distribution. </p>
-<p>More details are in the sections below.</p>
-<p><i><b>Note: These instructions describe how to install a stable release of the API. To install a (non stable) SNAPSHOT, use <a href="installing_the_latest_snapshot.html#vivo1.10">these instructions</a> instead.</b></i></p>
-<div class="section">
-<h2><a name="Edit_Vitrodependenciespom.xml"></a>Edit <tt>{Vitro}/dependencies/pom.xml</tt></h2>
-<p>There are many <tt>&lt;dependency&gt;</tt> tags within the <tt>&lt;dependencies&gt;</tt> section of <tt>pom.xml</tt>. Add another dependency:</p>
-
-<div class="source">
-<div class="source">
-<pre>  &lt;!-- Data Distribution API --&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;edu.cornell.library.scholars&lt;/groupId&gt;
-    &lt;artifactId&gt;data-distribution-api-vivo_1_10&lt;/artifactId&gt;
-    &lt;version&gt;1.1&lt;/version&gt;
-    &lt;type&gt;jar&lt;/type&gt;
-  &lt;/dependency&gt;
-</pre></div></div>
-<p>Before editing, you might see this at the end of <tt>pom.xml</tt>:</p>
-<p><img src="images/pom_xml_vivo1.10_before.png" alt="pom.xml before editing" /></p>
-<p>After editing, you would see this:</p>
-<p><img src="images/pom_xml_vivo1.10_after_release.png" alt="pom.xml after editing" /></p></div>
+        <h1>Using in VIVO 1.10</h1>
+<p>VIVO 1.10 comes with the Data Distributor API already installed! You will still need to configure your distributors before using the API. Here is an example of how to configure a simple distributor.</p>
+<p>In these instructions, <tt>{VIVO}</tt> is used to indicate the path to the main directory of the VIVO distribution. </p>
 <div class="section">
 <h2><a name="Configure_a_distributor"></a>Configure a distributor</h2>
 <p>Create a configuration file for the example distributor. The file will contain RDF data that tells the Data Distributor controller how to respond to requests. The file must be created in your VIVO distribution (or your third tier) in <tt>{VIVO}/home/src/main/resources/rdf/display/everytime</tt>.</p>
