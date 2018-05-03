@@ -1,8 +1,10 @@
 # Release Notes
 
-## version 1.2
+## version 1.1.1
 
 * Use servlet annotations to simplify installation. No need to modify web.xml.
+
+* Fix bug: translation from bytes to chars must always be UTF-8.
 
 ## version 1.1
 

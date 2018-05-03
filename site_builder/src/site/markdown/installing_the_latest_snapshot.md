@@ -3,53 +3,6 @@ The main installation instructions describe how to install the latest stable rel
 
 The instructions below describe how to install the latest (not stable) snapshot.
 
-<a name="vivo1.10"></a>
-# Installing the latest snapshot into VIVO 1.10
-
-The difference is in the `pom.xml` file, which requires
-
-* use a `SNAPSHOT` version number, 
-* include a reference to the snapshot repository.
-
-_**Other installation steps are unchanged.**_
-
-## Edit `{Vitro}/dependencies/pom.xml`
-
-There are many `<dependency>` tags within the `<dependencies>` section of `pom.xml`. Add another dependency:
-
-```
-  <!-- Data Distribution API -->
-  <dependency>
-    <groupId>edu.cornell.library.scholars</groupId>
-    <artifactId>data-distribution-api-vivo_1_10</artifactId>
-    <version>1.1-SNAPSHOT</version>
-    <type>jar</type>
-  </dependency>
-```
-
-There are no `<repository>` tags in `pom.xml`. Add one, telling Maven where to find the Data Distribution API:
-
-```
-  <!-- Reference the repository for the Data Distribution API. -->
-  <repositories>
-    <repository>
-      <id>data-distribution-api</id>
-      <name>DataDistributionAPI</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-  </repositories>
-    
-```
-
-Before editing, you might see this at the end of `pom.xml`:
-
-![pom.xml before editing](images/pom_xml_vivo1.10_before.png)
-
-After editing, you would see this:
-
-![pom.xml after editing](images/pom_xml_vivo1.10_after_snapshot.png)
-
-
 <a name="vivo1.9"></a>
 # Installing the latest snapshot into VIVO 1.9
 

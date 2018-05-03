@@ -70,6 +70,10 @@ mvn clean site deploy
 
 **DO NOT run `install` and `deploy` in the same command, or you wind up with double signatures.**
 
+If you are deploying a release (not a snapshot), then you will need to follow 
+[these instructions](http://central.sonatype.org/pages/releasing-the-deployment.html) 
+to make it publicly accessible.
+
 ## Update the site
 Use this to deploy changes to the site pages without updating the OSS repository
 

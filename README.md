@@ -23,7 +23,7 @@ _You will likely need to know SPARQL, and the structure of how your data is stor
 
 Currently, the Data Distribution API can be used with:
 
-* VIVO 1.10.0-beta2 
+* VIVO 1.10.0 
 * VIVO 1.9 
 * VIVO 1.8 
 
