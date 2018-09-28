@@ -39,8 +39,9 @@ cd {top-level-directory}
 mvn clean install
 ```
 
-* Compiles the code, runs the tests, creates the JARs.
-* Updates the code to the **local** repository
+* What does it do?
+	* Compiles the code, runs the tests, creates the JARs.
+	* Updates the code to the **local** repository
 
 ## Test the site pages
 Use this when editing the site pages, to see what the site will look like.
@@ -50,23 +51,27 @@ cd {top-level-directory}/site_builder
 mvn site:run
 ```
 
-* Assembles the site pages
-* Serves the pages at [http://localhost:9000](http://localhost:9000).
-	* **Note:** the Javadoc pages are not created until you ask for them, so there may be some delay.
-	* To stop serving, press ^c
+* What does it do?
+	* Assembles the site pages
+	* Serves the pages at [http://localhost:9000](http://localhost:9000).
+		* **Note:** the Javadoc pages are not created until you ask for them, 
+		  so there may be some delay when you click on the link.
+		* To stop serving, press ^c
 
 ## Build and deploy
 Use this when you are ready to deploy to the OSS repository
 
 ```
 cd {top-level-directory}
-mvn clean site deploy
+mvn clean site deploy -P release
 ```
 
-* Compile the code, test, create the JARs.
-* Update the code to the snapshot repository at Sonatype
-* Assemble the site pages
-* Deploy the site pages to GitHub.
+* What does it do?
+	* Compile the code, test, create the JARs.
+	* Attach Javadoc and source files.
+	* Update the code to the snapshot repository at Sonatype
+	* Assemble [the site pages][githubPages]
+	* Deploy the site pages to GitHub.
 
 **DO NOT run `install` and `deploy` in the same command, or you wind up with double signatures.**
 
@@ -74,16 +79,42 @@ If you are deploying a release (not a snapshot), then you will need to follow
 [these instructions](http://central.sonatype.org/pages/releasing-the-deployment.html) 
 to make it publicly accessible.
 
-## Update the site
-Use this to deploy changes to the site pages without updating the OSS repository
+Note the following sections on __Use the snapshot__ or __Use the release__, as appropriate.
+
+### Note: pause in the build script
+
+**It takes some time to build the site.**
+
+The build script will appear to pause at this message:
+
+```
+[INFO] --- site-maven-plugin:0.12:site (siteGithubPages) @ data-distribution-api-site ---
+[INFO] Creating 165 blobs
+```
+
+On my machine, the entire build takes about 9 minutes
+
+### Note: GPG-signatures
+
+**The Maven script prompts for a passphrase that will be used in signing the artifacts.**
+
+* The key used to sign the artifacts is the default key for the account where the build occurs. 
+* You must create a key-pair on your account
+* You must publish the public key so Sonatype (and users) can verify the signatures.
+* Check out Sonatype's page on [working with PGP signatures][ossSignaturesDoc], 
+  and their [accompanying video][videoSignatures].
+
+## Update the site pages
+Deploy changes to [the site pages][githubPages] without updating the OSS repository:
 
 ```
 cd {top-level-directory}/site_builder
 mvn site deploy
 ```
 
-* Assemble the site pages
-* Deploy the site pages to GitHub.
+* What does it do?
+	* Assemble [the site pages][githubPages]
+	* Deploy the site pages to GitHub.
 
 ## Change the version numbers
 Use this when changing from SNAPSHOT to a release version, or vice versa
@@ -92,56 +123,41 @@ Use this when changing from SNAPSHOT to a release version, or vice versa
 mvn release:update-versions -DautoVersionSubmodules=true
 ```
 
-* Prompt you for a version number, and set it in the main project and sub-projects.
-
-## Issue a release
-
-Build and deploy with a non-SNAPSHOT version number.
-
-Go through the OSS release process
-
-* Reference: [Releasing the Deployment][ossReleaseDoc]
-
-## Note: GPG-signatures
-
-**The Maven script prompts for a passphrase that will be used in signing the artifacts.**
-
-* The key used to sign the artifacts is the default key for the account where the build occurs. The public key must be published so people can verify the signatures.
-* Check out the page at [http://central.sonatype.org/pages/working-with-pgp-signatures.html](http://central.sonatype.org/pages/working-with-pgp-signatures.html)
-
-## Note: pause in the build script
-
-**It takes some time to build the site.**
-
-The build script will appear to pause at this message:
-
-```
-[INFO] --- site-maven-plugin:0.12:site (siteGithubPages) @ data-distribution-api-site ---
-[INFO] Creating 160 blobs
-```
-
-On my machine, the entire build takes about 9 minutes
+* What does it do?
+	* Prompt you for a version number, and set it in the main project and sub-projects.
 
 ## Use the snapshot
 
-If the project version ends in "SNAPSHOT" then the code was deployed to [https://oss.sonatype.org/content/repositories/snapshots][ossSnapshotRepo]
+If the project version ends in "SNAPSHOT" then the code was deployed to [the OSS snapshot repository][ossSnapshotRepo]
 
-You can see it by directly visiting [the snapshot repository][ossSnapshotRepoProject] or by going to the [repository browser][ossRepositoryBrowser], logging in, and choosing _Snapshots_ from the list at _Repositories_.
+You can see it by directly visiting [the snapshot repository][ossSnapshotRepoProject] 
+or by going to the [repository browser][ossRepositoryBrowser], logging in, 
+and choosing _Snapshots_ from the list at _Repositories_.
 
 You can use it as described in the installation instructions.
 
+Watch the video: [05 - First Deployments - Easy Publishing to Central Repository][videoDeployment]
+
 ## Use the release
-If the project version does not end in "SNAPSHOT", then the code is deployed to BOGUS BOGUS
-You can see it by BOGUS BOGUS
+If the project version does not end in "SNAPSHOT", then the code is deployed to [the OSS staging repository][ossStagingRepo]
+
+You cannot see this by directly visiting a URL, as with the snapshot repository. 
+It is only available through the [repository browser][ossRepositoryBrowser]. 
+Log in, look on the left for the _Build Promotion_ section, choose _Staging Repositories_, 
+and scroll down through the list of repositories to find one that starts with `educornell`...
 
 This is a staging repository. To move to the full repository, you need to close and release the code.
-Close it by BOGUS BOGUS
-Release it by BOGUS BOGUS
+Close it by selecting `Close` from the menu bar (right below the tab header).
+Release it by selecting `Release` from the menu bar.
+Note that each of these operations takes some time, 
+and then Sonatype takes a while to post the artifacts to Maven Central.
+
+You can use it as described in the installation instructions.
+
+[Read about it][ossReleaseDoc] and [Watch the video][videoDeployment].
 
 ## References
 [http://central.sonatype.org/pages/ossrh-guide.html](http://central.sonatype.org/pages/ossrh-guide.html)
-
-[https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be](https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be)
 
     
 # UML Diagrams    
@@ -158,7 +174,13 @@ that were used to create the UML diagrams in the site pages.
 
 
 [corsReference]:          https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[githubPages]:            https://cul-it.github.io/vivo-data-distribution-api/
 [ossReleaseDoc]:          http://central.sonatype.org/pages/releasing-the-deployment.html
+[ossSignaturesDoc]:       http://central.sonatype.org/pages/working-with-pgp-signatures.html
 [ossRepositoryBrowser]:   https://oss.sonatype.org/
 [ossSnapshotRepo]:        https://oss.sonatype.org/content/repositories/snapshots
 [ossSnapshotRepoProject]: https://oss.sonatype.org/content/repositories/snapshots/edu/cornell/library/scholars/
+[ossStagingRepo]:         https://oss.sonatype.org/service/local/staging/deploy/maven2
+[videoDeployment]:        https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be
+[videoSignatures]:        https://www.youtube.com/watch?v=HeQ70mRSSGE&feature=youtu.be
+

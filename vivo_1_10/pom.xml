@@ -50,24 +50,6 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <!-- Include Java source with the deployed artifacts. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <!-- Include Javadocs with the deployed artifacts. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-
-            <!-- Create GPG signatures on all artifacts. -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-            </plugin>
-        </plugins>
+        <!-- Nothing special -->
     </build>
 </project>
