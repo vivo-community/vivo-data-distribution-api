@@ -59,6 +59,14 @@ mvn site:run
 		* To stop serving, press ^c
 
 ## Build and deploy
+
+**Before you deploy a release (even a snapshot) for public use, you must have:**
+
+* An account at [Sonatype's JIRA system](https://issues.sonatype.org)
+* Authorization to post on behalf of `edu.cornell.library`. 
+  The authorizations are maintained on an [open JIRA ticket][sonatypeJiraTicket].
+* A published key-pair, for signing the release artifacts. See the **Note** below regarding signatures.
+
 Use this when you are ready to deploy to the OSS repository
 
 ```
@@ -69,7 +77,8 @@ mvn clean site deploy -P release
 * What does it do?
 	* Compile the code, test, create the JARs.
 	* Attach Javadoc and source files.
-	* Update the code to the snapshot repository at Sonatype
+	* Create signature files for the release artifacts.
+	* Upload the artifacts and signatures to the repository at Sonatype.
 	* Assemble [the site pages][githubPages]
 	* Deploy the site pages to GitHub.
 
@@ -181,6 +190,7 @@ that were used to create the UML diagrams in the site pages.
 [ossSnapshotRepo]:        https://oss.sonatype.org/content/repositories/snapshots
 [ossSnapshotRepoProject]: https://oss.sonatype.org/content/repositories/snapshots/edu/cornell/library/scholars/
 [ossStagingRepo]:         https://oss.sonatype.org/service/local/staging/deploy/maven2
+[sonatypeJiraTicket]:     https://issues.sonatype.org/browse/OSSRH-35717
 [videoDeployment]:        https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be
 [videoSignatures]:        https://www.youtube.com/watch?v=HeQ70mRSSGE&feature=youtu.be
 

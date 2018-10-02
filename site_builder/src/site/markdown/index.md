@@ -39,6 +39,7 @@ Currently, the Data Distribution API can be used with:
 	* [VIVO 1.8](./install_vivo_1_8.html)
 * [Configuring the distributors](./configuration.html)
 * [Implementations provided](./catalog.html)
+* [Examples from the wild](./examples.html)
 * [Cross-site distributions](./cors.html)
 * [Javadocs](./apidocs/index.html)
 * [Release Notes](./release_notes.html)
