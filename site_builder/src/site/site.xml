@@ -9,7 +9,13 @@
 			<item name="Install in VIVO 1.8" href="install_vivo_1_8.html" />
 			<item name="Configuration" href="configuration.html" />
 			<item name="Implementations" href="catalog.html" />
-			<item name="Examples from the wild" href="examples.html" />
+			<item name="Examples from the wild" href="examples.html" collapse="true">
+                <item name="A simple CONSTRUCT query" href="example_simpleRdfGraph.html" collapse="true"/>
+                <item name="Iterating on related queries" href="example_iteratedQueries.html" collapse="true"/>
+                <item name="Drilling down" href="example_drilldownAndFormatting.html" collapse="true"/>
+                <item name="Serving multiple files" href="example_selectedJsonFiles.html" collapse="true"/>
+                <item name="Cache for performance" href="example_cacheingForPerformance.html" collapse="true"/>
+            </item>
 			<item name="Cross-site distributions" href="cors.html" />
 			<item name="Javadoc" href="apidocs/index.html" />
 			<item name="Release notes" href="release_notes.html" />

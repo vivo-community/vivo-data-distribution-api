@@ -1,6 +1,6 @@
 # Cacheing the output when performance is unacceptable
 
-[Three sets of queries with slight variations: total of 12 queries](./example_iteratedQueries.html) describes
+[The example on iterating queries](./example_iteratedQueries.html) describes
 a collection of queries that analyze all of the Grants and Contracts in the triple-store, and that take
 more than 45 seconds to run.
 
