@@ -28,6 +28,8 @@
 		* At least enough to do basic authentication
 	* Reference: [Cross-Origin Resource Sharing][corsReference]
  	
+# Relationship with Maven Central
+Handled through this [JIRA ticket](https://issues.sonatype.org/browse/OSSRH-35717).
 
 # Build, test, deploy
 
