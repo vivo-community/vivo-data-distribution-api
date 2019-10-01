@@ -25,7 +25,7 @@
         <maven-site-plugin.skip>false</maven-site-plugin.skip>
 
         <!-- Used when creating the Javadocs -->
-        <vitro-version>1.10.0-beta2</vitro-version>
+        <vitro-version>1.11.0-SNAPSHOT</vitro-version>
 
         <!-- github server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
@@ -49,7 +49,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Include markdown conversion in the site creation; test at 
+            <!-- Include markdown conversion in the site creation; test at
                 port 9000 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -74,7 +74,7 @@
                 <version>0.12</version>
                 <configuration>
                     <repositoryName>vivo-data-distribution-api</repositoryName>
-                    <repositoryOwner>cul-it</repositoryOwner>
+                    <repositoryOwner>vivo-community</repositoryOwner>
                 </configuration>
                 <executions>
                     <execution>
@@ -128,7 +128,7 @@
                     <excludePackageNames>edu.cornell.mannlib.*</excludePackageNames>
                     <additionalparam>-Xdoclint:none</additionalparam>
 
-                    <!-- These should not be needed, but it appears that 
+                    <!-- These should not be needed, but it appears that
                         they are, to avoid warnings. -->
                     <additionalDependencies>
                         <additionalDependency>
