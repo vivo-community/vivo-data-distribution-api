@@ -23,6 +23,7 @@ _You will likely need to know SPARQL, and the structure of how your data is stor
 
 Currently, the Data Distribution API can be used with:
 
+* VIVO 1.11
 * VIVO 1.10
 * VIVO 1.9 
 * VIVO 1.8 
@@ -34,6 +35,7 @@ Currently, the Data Distribution API can be used with:
 * [Why another API in VIVO?](./motivation.html)
 * [How does the API work?](./structure.html)
 * Installation:
+	* [VIVO 1.11](./install_vivo_1_11.html)
 	* [VIVO 1.10](./install_vivo_1_10.html)
 	* [VIVO 1.9](./install_vivo_1_9.html)
 	* [VIVO 1.8](./install_vivo_1_8.html)
@@ -45,5 +47,5 @@ Currently, the Data Distribution API can be used with:
 * [The project on GitHub](https://github.com/cul-it/vivo-data-distribution-api)
 
 ## Credits
-The Data Distribution API for VIVO is created by the staff of the Cornell University Libraries, 
+The Data Distribution API for VIVO was created by the staff of the Cornell University Libraries, 
 as part of the [Scholars@Cornell](http://scholars.cornell.edu) project.
