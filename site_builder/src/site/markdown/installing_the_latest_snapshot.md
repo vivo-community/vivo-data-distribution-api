@@ -4,7 +4,7 @@ The main installation instructions describe how to install the latest stable rel
 The instructions below describe how to install the latest (not stable) snapshot.
 
 <a name="vivo1.10"></a>
-# Installing the latest snapshot into VIVO 1.10
+# Installing the latest snapshot into VIVO 1.10 and 1.11
 
 The difference is in the `pom.xml` file, which requires
 
@@ -22,7 +22,7 @@ There are many `<dependency>` tags within the `<dependencies>` section of `pom.x
   <dependency>
     <groupId>edu.cornell.library.scholars</groupId>
     <artifactId>data-distribution-api-vivo_1_10</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
     <type>jar</type>
   </dependency>
 ```
@@ -69,7 +69,7 @@ There are many `<dependency>` tags within the `<dependencies>` section of `pom.x
   <dependency>
     <groupId>edu.cornell.library.scholars</groupId>
     <artifactId>data-distribution-api-vivo_1_09</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
     <type>jar</type>
   </dependency>
 ```
@@ -118,7 +118,7 @@ mvn org.apache.maven.plugins:maven-dependency-plugin:get \
     -DrepoUrl=https://oss.sonatype.org/content/repositories/snapshots \
     -DgroupId=edu.cornell.library.scholars \
     -DartifactId=data-distribution-api-vivo_1_08 \
-    -Dversion=1.1-SNAPSHOT \
+    -Dversion=1.1.2-SNAPSHOT \
     -Dtransitive=false
 ```
 
